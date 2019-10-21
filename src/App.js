@@ -24,6 +24,9 @@ class App extends Component {
             {/* définir la route qui va mener vers la page not found attention à l'ordre !!!*/}
             <Route path="/not-found" component={NotFound} />
             {/** home toujours à la fin */}
+
+            <Redirect from="/produits" to="/products" />
+
             <Route path="/" exact component={Home} />
             {/* si aucune route ne match avec l'url demandé alors c'est le composant Redirect qui va prendre en charge le comporte , c'est à dire rediriger vers not-found */}
             <Redirect to="/not-found" />
