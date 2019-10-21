@@ -7,7 +7,7 @@ import Dashboard from "./components/admin/dashboard";
 import ProductDetails from "./components/productDetails";
 import NotFound from "./components/notFound";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -21,8 +21,12 @@ class App extends Component {
             <Route path="/posts/:annee/:mois" component={Posts} />
             <Route path="/products/:id" component={ProductDetails} />
             <Route path="/products" component={Products} />
+            {/* définir la route qui va mener vers la page not found attention à l'ordre !!!*/}
+            <Route path="/not-found" component={NotFound} />
             {/** home toujours à la fin */}
             <Route path="/" exact component={Home} />
+            {/* si aucune route ne match avec l'url demandé alors c'est le composant Redirect qui va prendre en charge le comporte , c'est à dire rediriger vers not-found */}
+            <Redirect to="/not-found" />
           </Switch>
         </section>
       </div>
