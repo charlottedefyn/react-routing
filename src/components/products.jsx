@@ -12,7 +12,7 @@ class Products extends Component {
   render() {
     return (
       <div>
-        <h1>Products</h1>
+        <h1>Products {this.props.location.pathname}</h1>
         <ul>
           {this.state.products.map(product => (
             <li key={product.id}>

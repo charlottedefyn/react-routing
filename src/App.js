@@ -18,7 +18,7 @@ class App extends Component {
           <Switch>
             {/** de la route la plus précise à la moins précise */}
             <Route path="/admin" component={Dashboard} />
-            <Route path="/posts" component={Posts} />
+            <Route path="/posts/:annee/:mois" component={Posts} />
             <Route path="/products/:id" component={ProductDetails} />
             <Route path="/products" component={Products} />
             {/** home toujours à la fin */}
