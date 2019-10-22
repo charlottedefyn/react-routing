@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "./input";
+import Textarea from "./textarea";
 
 class NewArticle extends Component {
   state = {
@@ -27,18 +28,12 @@ class NewArticle extends Component {
           label="Titre"
           onChange={this.change}
         />
-
-        <div className="form-group">
-          <label htmlFor="contenu">Contenu</label>
-          <textarea
-            name="contenu"
-            id="contenu"
-            rows="10"
-            className="form-control"
-            value={this.state.data.contenu}
-            onChange={this.change}
-          ></textarea>
-        </div>
+        <Textarea
+          name="contenu"
+          label="Contenu"
+          value={this.state.data.contenu}
+          onChange={this.change}
+        />
         <input type="submit" value="créer" className="btn btn-primary" />
       </form>
     );
