@@ -8,10 +8,30 @@ class NewArticle extends Component {
     errors: {}
   };
 
+  validationChamp = champ => {
+    const name = champ.name;
+    const value = champ.value;
+
+    if (name === "titre") {
+      if (value.trim() === "") return "Champ titre à compléter";
+    }
+
+    if (name === "contenu") {
+      if (value.trim() === "") return "Champ contenu à compléter";
+    }
+  };
+
   change = e => {
+    const errors = { ...this.state.errors };
+
+    const errorMessage = this.validationChamp(e.currentTarget);
+
+    if (errorMessage) errors[e.currentTarget.name] = errorMessage;
+    else delete errors[e.currentTarget.name];
+
     const cloneData = { ...this.state.data };
     cloneData[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ data: cloneData });
+    this.setState({ data: cloneData, errors: errors });
   };
 
   validation = () => {
