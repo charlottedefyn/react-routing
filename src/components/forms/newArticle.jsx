@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Input from "./input";
 
 class NewArticle extends Component {
   state = {
@@ -11,20 +12,22 @@ class NewArticle extends Component {
     this.setState({ data: cloneData });
   };
 
+  submit = e => {
+    e.preventDefault();
+
+    console.log("tentative de création d'un nouvel article", this.state.data);
+  };
+
   render() {
     return (
-      <form>
-        <div className="form-group">
-          <label htmlFor="titre">Titre</label>
-          <input
-            type="text"
-            className="form-control"
-            id="titre"
-            name="titre"
-            value={this.state.data.titre}
-            onChange={this.change}
-          />
-        </div>
+      <form onSubmit={this.submit}>
+        <Input
+          name="titre"
+          value={this.state.data.titre}
+          label="Titre"
+          onChange={this.change}
+        />
+
         <div className="form-group">
           <label htmlFor="contenu">Contenu</label>
           <textarea
