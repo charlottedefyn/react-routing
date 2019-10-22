@@ -4,7 +4,8 @@ import Textarea from "./textarea";
 
 class NewArticle extends Component {
   state = {
-    data: { titre: "", contenu: "" }
+    data: { titre: "", contenu: "" },
+    errors: {}
   };
 
   change = e => {
@@ -15,7 +16,6 @@ class NewArticle extends Component {
 
   submit = e => {
     e.preventDefault();
-
     console.log("tentative de création d'un nouvel article", this.state.data);
   };
 
@@ -27,12 +27,14 @@ class NewArticle extends Component {
           value={this.state.data.titre}
           label="Titre"
           onChange={this.change}
+          error={this.state.errors.titre}
         />
         <Textarea
           name="contenu"
           label="Contenu"
           value={this.state.data.contenu}
           onChange={this.change}
+          error={this.state.errors.contenu}
         />
         <input type="submit" value="créer" className="btn btn-primary" />
       </form>
