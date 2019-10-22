@@ -14,8 +14,23 @@ class NewArticle extends Component {
     this.setState({ data: cloneData });
   };
 
+  validation = () => {
+    const cloneData = { ...this.state.data };
+    const errors = {};
+    if (cloneData.titre.trim() === "") errors.titre = "champ titre obligatoire";
+    if (cloneData.contenu.trim() === "")
+      errors.contenu = "champ contenu obligatoire";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   submit = e => {
     e.preventDefault();
+
+    const errorsOnSubmit = this.validation();
+    this.setState({ errors: errorsOnSubmit || {} });
+    if (errorsOnSubmit) return;
+
     console.log("tentative de création d'un nouvel article", this.state.data);
   };
 
