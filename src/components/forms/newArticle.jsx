@@ -21,15 +21,14 @@ class NewArticle extends Form {
 
   schema = Joi.object(this.schemaData);
 
-  doSubmit = e => {
+  doSubmit = () => {
     // appel à une API voulue
-    e.preventDefault();
     console.log("tentative de création d'un nouvel article", this.state.data);
   };
 
   render() {
     return (
-      <form onSubmit={this.doSubmit}>
+      <form onSubmit={this.submit}>
         <Input
           name="titre"
           value={this.state.data.titre}
