@@ -14,3 +14,13 @@ le formulaire suivant
 - vérifiez que les champs ne sont pas vides avant soumission
 - vous pouvez utiliser Twitter Bootstrap pour réaliser ce formulaire 
 (button)[https://getbootstrap.com/docs/4.3/components/buttons/] (form)[https://getbootstrap.com/docs/4.3/components/forms/]
+
+<textarea></textarea>
+
+<input type="text"/>
+<input type="password"/>
+<input type="date"/>
+<input type="number"/>
+<input type="email"/>
+
+<input type="textarea"/> n'existe pas !!
