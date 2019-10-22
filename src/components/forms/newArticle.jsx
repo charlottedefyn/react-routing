@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./input";
 import Textarea from "./textarea";
+import Joi from "@hapi/joi";
 
 class NewArticle extends Component {
   state = {
@@ -8,17 +9,29 @@ class NewArticle extends Component {
     errors: {}
   };
 
+  schemaData = {
+    titre: Joi.string()
+      .min(3)
+      .required(),
+    contenu: Joi.string()
+      .min(3)
+      .required()
+  };
+
+  schema = Joi.object(this.schemaData);
+
   validationChamp = champ => {
     const name = champ.name;
     const value = champ.value;
 
-    if (name === "titre") {
-      if (value.trim() === "") return "Champ titre à compléter";
-    }
-
-    if (name === "contenu") {
-      if (value.trim() === "") return "Champ contenu à compléter";
-    }
+    const obj = { [name]: value };
+    const schema = Joi.object({ [name]: this.schemaData[name] });
+    //console.log({ [name]: this.schemaProfil[name] });
+    const result = schema.validate(obj);
+    console.log(result);
+    if (Object.keys(result).length === 2)
+      return result.error.details[0].message;
+    return null;
   };
 
   change = e => {
@@ -35,13 +48,15 @@ class NewArticle extends Component {
   };
 
   validation = () => {
-    const cloneData = { ...this.state.data };
-    const errors = {};
-    if (cloneData.titre.trim() === "") errors.titre = "champ titre obligatoire";
-    if (cloneData.contenu.trim() === "")
-      errors.contenu = "champ contenu obligatoire";
+    const { data } = this.state;
 
-    return Object.keys(errors).length === 0 ? null : errors;
+    const result = this.schema.validate(data, { abortEarly: false });
+    console.log(result);
+    if (!result.error) return null;
+
+    const errors = {};
+    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    return errors;
   };
 
   submit = e => {
